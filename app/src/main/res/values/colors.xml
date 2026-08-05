@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- One UI Inspired Premium Color Palette -->
+    <color name="primary_light">#3A7DF0</color>
+    <color name="primary_variant_light">#1D57C7</color>
+    <color name="surface_light">#F5F6FA</color>
+    <color name="surface_card_light">#FFFFFF</color>
+    <color name="text_title_light">#1A1D24</color>
+    <color name="text_subtitle_light">#6A6E7D</color>
+    
+    <!-- Priority Colors -->
+    <color name="priority_high">#E84A5F</color>
+    <color name="priority_medium">#FE8A71</color>
+    <color name="priority_low">#3A7DF0</color>
+    
+    <!-- Category Accent Colors -->
+    <color name="cat_work">#4A90E2</color>
+    <color name="cat_personal">#9B59B6</color>
+    <color name="cat_shopping">#F5A623</color>
+    <color name="cat_health">#E84A5F</color>
+    <color name="cat_finance">#2ECC71</color>
+    <color name="cat_communication">#00A896</color>
+    
+    <!-- System and Shading -->
+    <color name="grey_light">#E0E0E0</color>
+    <color name="grey_dark">#707070</color>
+    <color name="divider">#1A000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="ic_launcher_background">#12131A</color>
+
+    <!-- Category Card Backgrounds (Light mode pastel shades) -->
+    <color name="bg_cat_work">#E3F2FD</color>
+    <color name="bg_cat_personal">#F3E5F5</color>
+    <color name="bg_cat_shopping">#FFF3E0</color>
+    <color name="bg_cat_health">#FFEBEE</color>
+    <color name="bg_cat_finance">#E8F5E9</color>
+    <color name="bg_cat_communication">#E0F2F1</color>
+    <color name="bg_location">#E8F0FE</color>
+</resources>

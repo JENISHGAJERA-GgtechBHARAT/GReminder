@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface_light"
+    android:clipToPadding="false"
+    android:paddingBottom="88dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Page Header -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="AI Dashboard"
+            android:textColor="@color/text_title_light"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <!-- NPU Accelerator Status Badge -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="#E8F5E9"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="4dp"
+            android:gravity="center_vertical">
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="#2ECC71" />
+
+            <TextView
+                android:id="@+id/tv_npu_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:text="NPU Status: Active (NNAPI Accelerated)"
+                android:textColor="#2E7D32"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- NLP Input Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Natural Language Parser"
+                    android:textColor="@color/text_title_light"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/et_ai_query"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/surface_light"
+                    android:gravity="top|start"
+                    android:hint="Type e.g., 'Remind me tomorrow at 8 PM to buy groceries'"
+                    android:padding="12dp"
+                    android:textColor="@color/text_title_light"
+                    android:textSize="14sp"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:importantForAutofill="no"/>
+
+                <!-- Parser action controls -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:gravity="end">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_ai_clear"
+                        style="@style/Widget.Material3.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Clear"
+                        android:textColor="@color/text_subtitle_light" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_ai_parse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Parse"
+                        app:backgroundTint="@color/primary_light" />
+                </LinearLayout>
+
+                <!-- Parsed Results Display Panel -->
+                <LinearLayout
+                    android:id="@+id/layout_parsed_results"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/surface_light"
+                    android:orientation="vertical"
+                    android:padding="12dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AI Extracted Entities:"
+                        android:textColor="@color/primary_light"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="8dp"/>
+
+                    <TextView android:id="@+id/tv_parsed_title" style="@style/ParsedEntityStyle" android:text="Title: Buy groceries" />
+                    <TextView android:id="@+id/tv_parsed_datetime" style="@style/ParsedEntityStyle" android:text="Time: Tomorrow, 8:00 PM" />
+                    <TextView android:id="@+id/tv_parsed_repeat" style="@style/ParsedEntityStyle" android:text="Repeat: None" />
+                    <TextView android:id="@+id/tv_parsed_priority" style="@style/ParsedEntityStyle" android:text="Priority: LOW" />
+                    <TextView android:id="@+id/tv_parsed_category" style="@style/ParsedEntityStyle" android:text="Category: Shopping" />
+                    <TextView android:id="@+id/tv_parsed_location" style="@style/ParsedEntityStyle" android:text="Location: None" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_add_parsed_task"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Create Reminder"
+                        app:backgroundTint="@color/primary_light"
+                        app:cornerRadius="20dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Document OCR Scanned Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="On-Device OCR scanner"
+                    android:textColor="@color/text_title_light"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Select a sample document template to simulate photo upload and NPU text scanning."
+                    android:textColor="@color/text_subtitle_light"
+                    android:textSize="12sp" />
+
+                <!-- Mock Templates Selector -->
+                <RadioGroup
+                    android:id="@+id/rg_ocr_templates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rb_prescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rx: Take Vitamin Capsule twice daily"
+                        android:textSize="13sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_bill"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Gas Bill Due Date: 2026-07-28 Amount: $45"
+                        android:textSize="13sp"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_meeting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Project Review - Monday at the Office"
+                        android:textSize="13sp"/>
+                </RadioGroup>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_ocr_scan"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Scan Document with NPU"
+                    app:icon="@drawable/ic_attach"
+                    app:strokeColor="@color/grey_light" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Habit Learning Insights -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="AI Habits &amp; Routine Analysis"
+                    android:textColor="@color/text_title_light"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Insight bullet list -->
+                <LinearLayout
+                    android:id="@+id/layout_routine_insights"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp">
+                    
+                    <!-- Inside dynamically populated text -->
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

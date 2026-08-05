@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme for Dark mode. -->
+    <style name="Base.Theme.GRemaider" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Main colors -->
+        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimaryDark">@color/primary_variant_light</item>
+        <item name="colorAccent">@color/primary_light</item>
+        
+        <!-- Surface colors -->
+        <item name="android:windowBackground">@color/surface_light</item>
+        <item name="colorSurface">@color/surface_card_light</item>
+        
+        <!-- Customize status bar for dark theme -->
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item> <!-- White icons on dark status bar -->
+    </style>
+</resources>

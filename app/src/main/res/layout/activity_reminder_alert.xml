@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#12131A"
+    android:padding="24dp">
+
+    <!-- Top Status / Icon -->
+    <LinearLayout
+        android:id="@+id/layout_alert_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="60dp">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@android:drawable/ic_lock_idle_alarm"
+            android:tint="#4D88FF"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REMINDER ALERT"
+            android:textColor="#8A92A6"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.1"/>
+    </LinearLayout>
+
+    <!-- Center Card Details -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:background="#1F2029"
+        android:padding="32dp"
+        android:elevation="8dp">
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/tv_alert_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Water the Plants"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/tv_alert_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remember to add fertilizer to the balcony roses and water them thoroughly."
+            android:textColor="#A0A5B5"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"/>
+    </LinearLayout>
+
+    <!-- Bottom Actions Slider / Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp">
+
+        <!-- Complete Button (Pill styled, premium solid accent color) -->
+        <Button
+            android:id="@+id/btn_alert_complete"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="#4D88FF"
+            android:text="Mark as Completed"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Row for Snooze and Dismiss -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btn_alert_snooze"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#2C2E3B"
+                android:text="Snooze 10m"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginEnd="6dp"/>
+
+            <Button
+                android:id="@+id/btn_alert_dismiss"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="#2C2E3B"
+                android:text="Dismiss"
+                android:textColor="#8A92A6"
+                android:textSize="14sp"
+                android:layout_marginStart="6dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

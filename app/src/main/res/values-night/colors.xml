@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#1E202C</color> <!-- Dark cards background -->
+    <color name="surface_light">#12131A</color> <!-- Dark window background -->
+    <color name="surface_card_light">#1E202C</color> <!-- Dark surface color -->
+    <color name="text_title_light">#FFFFFF</color> <!-- White headers & main text -->
+    <color name="text_subtitle_light">#B0B3C2</color> <!-- Light subtitles & details -->
+    <color name="grey_light">#2A2C38</color> <!-- Dark theme dividers -->
+
+    <!-- Category Card Backgrounds (Dark mode pastel/semi-dark shades) -->
+    <color name="bg_cat_work">#1A2536</color> <!-- Dark theme Work background -->
+    <color name="bg_cat_personal">#261B2E</color> <!-- Dark theme Personal background -->
+    <color name="bg_cat_shopping">#2E2214</color> <!-- Dark theme Shopping background -->
+    <color name="bg_cat_health">#33181C</color> <!-- Dark theme Health background -->
+    <color name="bg_cat_finance">#172B1E</color> <!-- Dark theme Finance background -->
+    <color name="bg_cat_communication">#162C2A</color> <!-- Dark theme Communication background -->
+    <color name="bg_location">#1B2E4E</color> <!-- Dark theme location badge background -->
+</resources>

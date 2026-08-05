@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/surface_light"
+    android:padding="20dp">
+
+    <!-- One UI Page Header -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Categories"
+        android:textColor="@color/text_title_light"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_categories_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Filter reminders by context"
+        android:textColor="@color/text_subtitle_light"
+        android:textSize="14sp" />
+
+    <!-- Grid Layout of Categories -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:alignmentMode="alignBounds"
+        android:columnOrderPreserved="false">
+
+        <!-- Work Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_cat_work"
+            style="@style/CategoryCardStyle"
+            app:cardBackgroundColor="@color/bg_cat_work">
+            <RelativeLayout style="@style/CategoryCardContentStyle">
+                <ImageView android:id="@+id/iv_cat_work" style="@style/CategoryCardIconStyle" android:src="@drawable/ic_work" app:tint="@color/cat_work"/>
+                <TextView android:id="@+id/tv_cat_work_title" style="@style/CategoryCardTitleStyle" android:text="Work" android:layout_toEndOf="@id/iv_cat_work" />
+                <TextView android:id="@+id/tv_cat_work_count" style="@style/CategoryCardCountStyle" android:text="0 active" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Personal Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_cat_personal"
+            style="@style/CategoryCardStyle"
+            app:cardBackgroundColor="@color/bg_cat_personal">
+            <RelativeLayout style="@style/CategoryCardContentStyle">
+                <ImageView android:id="@+id/iv_cat_personal" style="@style/CategoryCardIconStyle" android:src="@drawable/ic_person" app:tint="@color/cat_personal"/>
+                <TextView android:id="@+id/tv_cat_personal_title" style="@style/CategoryCardTitleStyle" android:text="Personal" android:layout_toEndOf="@id/iv_cat_personal" />
+                <TextView android:id="@+id/tv_cat_personal_count" style="@style/CategoryCardCountStyle" android:text="0 active" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Shopping Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_cat_shopping"
+            style="@style/CategoryCardStyle"
+            app:cardBackgroundColor="@color/bg_cat_shopping">
+            <RelativeLayout style="@style/CategoryCardContentStyle">
+                <ImageView android:id="@+id/iv_cat_shopping" style="@style/CategoryCardIconStyle" android:src="@drawable/ic_shopping" app:tint="@color/cat_shopping"/>
+                <TextView android:id="@+id/tv_cat_shopping_title" style="@style/CategoryCardTitleStyle" android:text="Shopping" android:layout_toEndOf="@id/iv_cat_shopping" />
+                <TextView android:id="@+id/tv_cat_shopping_count" style="@style/CategoryCardCountStyle" android:text="0 active" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Health Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_cat_health"
+            style="@style/CategoryCardStyle"
+            app:cardBackgroundColor="@color/bg_cat_health">
+            <RelativeLayout style="@style/CategoryCardContentStyle">
+                <ImageView android:id="@+id/iv_cat_health" style="@style/CategoryCardIconStyle" android:src="@drawable/ic_health" app:tint="@color/cat_health"/>
+                <TextView android:id="@+id/tv_cat_health_title" style="@style/CategoryCardTitleStyle" android:text="Health" android:layout_toEndOf="@id/iv_cat_health" />
+                <TextView android:id="@+id/tv_cat_health_count" style="@style/CategoryCardCountStyle" android:text="0 active" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Finance Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_cat_finance"
+            style="@style/CategoryCardStyle"
+            app:cardBackgroundColor="@color/bg_cat_finance">
+            <RelativeLayout style="@style/CategoryCardContentStyle">
+                <ImageView android:id="@+id/iv_cat_finance" style="@style/CategoryCardIconStyle" android:src="@drawable/ic_finance" app:tint="@color/cat_finance"/>
+                <TextView android:id="@+id/tv_cat_finance_title" style="@style/CategoryCardTitleStyle" android:text="Finance" android:layout_toEndOf="@id/iv_cat_finance" />
+                <TextView android:id="@+id/tv_cat_finance_count" style="@style/CategoryCardCountStyle" android:text="0 active" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Communication Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_cat_communication"
+            style="@style/CategoryCardStyle"
+            app:cardBackgroundColor="@color/bg_cat_communication">
+            <RelativeLayout style="@style/CategoryCardContentStyle">
+                <ImageView android:id="@+id/iv_cat_communication" style="@style/CategoryCardIconStyle" android:src="@drawable/ic_communication" app:tint="@color/cat_communication"/>
+                <TextView android:id="@+id/tv_cat_communication_title" style="@style/CategoryCardTitleStyle" android:text="Comm." android:layout_toEndOf="@id/iv_cat_communication" />
+                <TextView android:id="@+id/tv_cat_communication_count" style="@style/CategoryCardCountStyle" android:text="0 active" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </GridLayout>
+
+    <!-- Reminders under selected category -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_selected_cat_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reminders: Personal"
+            android:textColor="@color/text_title_light"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_cat_reminders_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:gravity="center"
+            android:text="No active reminders in this category."
+            android:textColor="@color/text_subtitle_light"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cat_reminders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_card"
+    android:padding="16dp">
+
+    <!-- Header Row -->
+    <TextView
+        android:id="@+id/widget_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GReminder Today"
+        android:textColor="@color/primary_light"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/widget_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="July 14"
+        android:textColor="@color/text_subtitle_light"
+        android:textSize="11sp" />
+
+    <!-- Core info content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/widget_title"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/widget_status_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading tasks..."
+            android:textColor="@color/text_title_light"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Tap to open app and view active agenda."
+            android:textColor="@color/text_subtitle_light"
+            android:textSize="11sp" />
+    </LinearLayout>
+
+    <!-- Quick add widget button -->
+    <ImageView
+        android:id="@+id/widget_btn_add"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_plus"
+        android:background="#E8F0FE"
+        android:padding="6dp"
+        android:contentDescription="Quick add" />
+
+</RelativeLayout>

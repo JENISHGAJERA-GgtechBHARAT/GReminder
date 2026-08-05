@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GReminder</string>
+    
+    <!-- Navigation Tabs -->
+    <string name="title_home">Home</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_ai">AI Engine</string>
+    <string name="title_categories">Categories</string>
+    <string name="title_settings">Settings</string>
+</resources>
