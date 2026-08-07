@@ -1,119 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#12131A"
-    android:padding="24dp">
+    android:background="@drawable/bg_alarm_gradient"
+    android:keepScreenOn="true">
 
-    <!-- Top Status / Icon -->
-    <LinearLayout
-        android:id="@+id/layout_alert_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_marginTop="60dp">
+    <!-- Top Pulsing Bell Animation Container -->
+    <FrameLayout
+        android:id="@+id/layout_alarm_icon"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Pulsing Halos -->
+        <View
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_pulse_ring" />
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@android:drawable/ic_lock_idle_alarm"
-            android:tint="#4D88FF"
-            android:layout_marginBottom="16dp"/>
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_notification"
+            app:tint="@color/primary_light" />
+    </FrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
+    <!-- Header Text -->
+    <TextView
+        android:id="@+id/tv_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="G-REMINDER ALERT"
+        android:textColor="@color/text_subtitle_light"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_alarm_icon" />
+
+    <!-- Frosted Glass Card Panel -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
+        app:cardBackgroundColor="#1A1F2E"
+        app:layout_constraintBottom_toTopOf="@id/layout_actions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="REMINDER ALERT"
-            android:textColor="#8A92A6"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.1"/>
-    </LinearLayout>
+            android:orientation="vertical"
+            android:padding="32dp"
+            android:gravity="center">
 
-    <!-- Center Card Details -->
+            <TextView
+                android:id="@+id/tv_alert_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reminder Title"
+                android:textColor="@color/white"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tv_alert_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reminder Description goes here."
+                android:textColor="#A0A8C0"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:lineSpacingExtra="4dp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Bottom Actions Container -->
     <LinearLayout
+        android:id="@+id/layout_actions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:background="#1F2029"
-        android:padding="32dp"
-        android:elevation="8dp">
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/tv_alert_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Water the Plants"
-            android:textColor="#FFFFFF"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="12dp"/>
-
-        <!-- Description -->
-        <TextView
-            android:id="@+id/tv_alert_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Remember to add fertilizer to the balcony roses and water them thoroughly."
-            android:textColor="#A0A5B5"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:lineSpacingExtra="4dp"/>
-    </LinearLayout>
-
-    <!-- Bottom Actions Slider / Buttons -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="30dp">
-
-        <!-- Complete Button (Pill styled, premium solid accent color) -->
-        <Button
+        <!-- Complete Button -->
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_alert_complete"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="#4D88FF"
+            android:layout_height="60dp"
             android:text="Mark as Completed"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:layout_marginBottom="12dp"/>
+            app:cornerRadius="30dp"
+            app:backgroundTint="@color/primary_light"
+            android:layout_marginBottom="16dp"
+            app:elevation="4dp" />
 
-        <!-- Row for Snooze and Dismiss -->
+        <!-- Snooze / Dismiss Row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_alert_snooze"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="54dp"
                 android:layout_weight="1"
-                android:background="#2C2E3B"
                 android:text="Snooze 10m"
-                android:textColor="#FFFFFF"
-                android:textSize="14sp"
-                android:layout_marginEnd="6dp"/>
+                android:textColor="@color/white"
+                app:cornerRadius="27dp"
+                app:strokeColor="#3A435E"
+                app:strokeWidth="1.5dp"
+                android:layout_marginEnd="8dp" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_alert_dismiss"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:layout_height="54dp"
                 android:layout_weight="1"
-                android:background="#2C2E3B"
                 android:text="Dismiss"
-                android:textColor="#8A92A6"
-                android:textSize="14sp"
-                android:layout_marginStart="6dp"/>
+                android:textColor="@color/text_subtitle_light"
+                app:cornerRadius="27dp"
+                app:strokeColor="#3A435E"
+                app:strokeWidth="1.5dp"
+                android:layout_marginStart="8dp" />
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
