@@ -32,6 +32,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     private List<Reminder> reminders = new ArrayList<>();
     private final OnReminderClickListener clickListener;
     private final OnReminderCheckChangeListener checkListener;
+    private final OnReminderLongClickListener longClickListener;
     private final Context context;
 
     public interface OnReminderClickListener {
@@ -42,10 +43,15 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         void onReminderCheckChange(Reminder reminder, boolean isChecked);
     }
 
-    public ReminderAdapter(Context context, OnReminderClickListener clickListener, OnReminderCheckChangeListener checkListener) {
+    public interface OnReminderLongClickListener {
+        void onReminderLongClick(Reminder reminder);
+    }
+
+    public ReminderAdapter(Context context, OnReminderClickListener clickListener, OnReminderCheckChangeListener checkListener, OnReminderLongClickListener longClickListener) {
         this.context = context;
         this.clickListener = clickListener;
         this.checkListener = checkListener;
+        this.longClickListener = longClickListener;
     }
 
     public void setReminders(List<Reminder> reminders) {
@@ -231,6 +237,14 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
                 if (clickListener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
                     clickListener.onReminderClick(reminder);
                 }
+            });
+
+            itemView.setOnLongClickListener(v -> {
+                if (longClickListener != null && getAdapterPosition() != RecyclerView.NO_POSITION) {
+                    longClickListener.onReminderLongClick(reminder);
+                    return true;
+                }
+                return false;
             });
 
             cbComplete.setOnClickListener(v -> {

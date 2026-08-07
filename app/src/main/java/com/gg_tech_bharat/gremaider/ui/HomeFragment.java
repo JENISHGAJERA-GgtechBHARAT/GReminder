@@ -65,11 +65,13 @@ public class HomeFragment extends Fragment {
         // Setup Adapters
         activeAdapter = new ReminderAdapter(getContext(), 
                 reminder -> openEditSheet(reminder), 
-                (reminder, isChecked) -> toggleReminderCompletion(reminder, isChecked));
+                (reminder, isChecked) -> toggleReminderCompletion(reminder, isChecked),
+                reminder -> showDeleteConfirmationDialog(reminder));
         
         pinnedAdapter = new ReminderAdapter(getContext(), 
                 reminder -> openEditSheet(reminder), 
-                (reminder, isChecked) -> toggleReminderCompletion(reminder, isChecked));
+                (reminder, isChecked) -> toggleReminderCompletion(reminder, isChecked),
+                reminder -> showDeleteConfirmationDialog(reminder));
 
         rvActive.setAdapter(activeAdapter);
         rvPinned.setAdapter(pinnedAdapter);
@@ -160,6 +162,21 @@ public class HomeFragment extends Fragment {
             ReminderAlarmManager.scheduleAlarm(getContext(), reminder);
         }
         updateProductivityScore();
+    }
+
+    private void showDeleteConfirmationDialog(Reminder reminder) {
+        new android.app.AlertDialog.Builder(requireContext())
+                .setTitle("Delete Reminder")
+                .setMessage("Are you sure you want to delete this reminder?")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    // Cancel active alarm
+                    ReminderAlarmManager.cancelAlarm(getContext(), reminder.getId());
+                    // Delete from database
+                    viewModel.delete(reminder);
+                    android.widget.Toast.makeText(getContext(), "Reminder deleted", android.widget.Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void openCreationSheet() {

@@ -58,7 +58,8 @@ public class CategoriesFragment extends Fragment {
         
         adapter = new ReminderAdapter(getContext(), 
                 reminder -> openEditSheet(reminder), 
-                (reminder, isChecked) -> toggleReminderCompletion(reminder, isChecked));
+                (reminder, isChecked) -> toggleReminderCompletion(reminder, isChecked),
+                reminder -> showDeleteConfirmationDialog(reminder));
         rvCat.setAdapter(adapter);
 
         // Bind Card Clicks to change filter
@@ -128,6 +129,21 @@ public class CategoriesFragment extends Fragment {
         } else {
             ReminderAlarmManager.scheduleAlarm(getContext(), reminder);
         }
+    }
+
+    private void showDeleteConfirmationDialog(Reminder reminder) {
+        new android.app.AlertDialog.Builder(requireContext())
+                .setTitle("Delete Reminder")
+                .setMessage("Are you sure you want to delete this reminder?")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    // Cancel active alarm
+                    com.gg_tech_bharat.gremaider.receiver.ReminderAlarmManager.cancelAlarm(getContext(), reminder.getId());
+                    // Delete from database
+                    viewModel.delete(reminder);
+                    android.widget.Toast.makeText(getContext(), "Reminder deleted", android.widget.Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void openEditSheet(Reminder reminder) {

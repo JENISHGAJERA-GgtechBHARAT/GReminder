@@ -142,6 +142,8 @@ public class PhoneCallReceiver extends BroadcastReceiver {
                         String lowerBody = body.toLowerCase();
                         if (lowerBody.contains("call") || 
                             lowerBody.contains("later") || 
+                            lowerBody.contains("latter") || 
+                            lowerBody.contains("bake") || 
                             lowerBody.contains("busy") || 
                             lowerBody.contains("talk") || 
                             lowerBody.contains("drive") || 

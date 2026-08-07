@@ -63,7 +63,8 @@ public class CalendarFragment extends Fragment {
         rvAgenda.setLayoutManager(new LinearLayoutManager(getContext()));
         agendaAdapter = new ReminderAdapter(getContext(), 
                 reminder -> openEditSheet(reminder), 
-                (reminder, isChecked) -> toggleReminderCompletion(reminder, isChecked));
+                (reminder, isChecked) -> toggleReminderCompletion(reminder, isChecked),
+                reminder -> showDeleteConfirmationDialog(reminder));
         rvAgenda.setAdapter(agendaAdapter);
 
         // Set calendar state
@@ -155,6 +156,22 @@ public class CalendarFragment extends Fragment {
         reminder.setCompleted(isChecked);
         viewModel.update(reminder);
         updateAgendaList();
+    }
+
+    private void showDeleteConfirmationDialog(Reminder reminder) {
+        new android.app.AlertDialog.Builder(requireContext())
+                .setTitle("Delete Reminder")
+                .setMessage("Are you sure you want to delete this reminder?")
+                .setPositiveButton("Delete", (dialog, which) -> {
+                    // Cancel active alarm
+                    com.gg_tech_bharat.gremaider.receiver.ReminderAlarmManager.cancelAlarm(getContext(), reminder.getId());
+                    // Delete from database
+                    viewModel.delete(reminder);
+                    updateAgendaList();
+                    android.widget.Toast.makeText(getContext(), "Reminder deleted", android.widget.Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void openEditSheet(Reminder reminder) {
