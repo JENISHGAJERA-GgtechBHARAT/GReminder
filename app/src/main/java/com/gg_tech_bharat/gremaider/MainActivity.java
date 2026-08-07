@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
             permissions.add(android.Manifest.permission.READ_PHONE_STATE);
             permissions.add(android.Manifest.permission.READ_CALL_LOG);
             permissions.add(android.Manifest.permission.READ_SMS);
+            permissions.add(android.Manifest.permission.READ_CONTACTS);
             
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
                 permissions.add(android.Manifest.permission.POST_NOTIFICATIONS);

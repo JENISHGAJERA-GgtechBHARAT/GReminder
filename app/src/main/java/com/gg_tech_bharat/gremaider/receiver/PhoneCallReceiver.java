@@ -174,12 +174,36 @@ public class PhoneCallReceiver extends BroadcastReceiver {
         }
     }
 
+    private String getContactName(Context context, String phoneNumber) {
+        String contactName = null;
+        Uri uri = Uri.withAppendedPath(
+                android.provider.ContactsContract.PhoneLookup.CONTENT_FILTER_URI, 
+                Uri.encode(phoneNumber)
+        );
+        String[] projection = new String[]{android.provider.ContactsContract.PhoneLookup.DISPLAY_NAME};
+        
+        try (Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null)) {
+            if (cursor != null && cursor.moveToFirst()) {
+                int nameIndex = cursor.getColumnIndex(android.provider.ContactsContract.PhoneLookup.DISPLAY_NAME);
+                if (nameIndex != -1) {
+                    contactName = cursor.getString(nameIndex);
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error looking up contact name", e);
+        }
+        return contactName;
+    }
+
     private void createCallbackReminder(Context context, String phoneNumber, long delayMillis, String desc) {
         AppDatabase db = AppDatabase.getDatabase(context);
         ReminderDao dao = db.reminderDao();
 
         long scheduleTime = System.currentTimeMillis() + delayMillis;
-        String title = "Call back " + phoneNumber;
+        String contactName = getContactName(context, phoneNumber);
+        String title = (contactName != null && !contactName.trim().isEmpty()) 
+                ? "Call " + contactName 
+                : "Call back " + phoneNumber;
 
         Reminder reminder = new Reminder(
                 title,
