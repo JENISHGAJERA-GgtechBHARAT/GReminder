@@ -57,36 +57,29 @@ public class ReminderAlarmManager {
         );
 
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (alarmManager.canScheduleExactAlarms()) {
-                    alarmManager.setExactAndAllowWhileIdle(
-                            AlarmManager.RTC_WAKEUP,
-                            alarmTime,
-                            pendingIntent
-                    );
-                    Log.d(TAG, "Scheduled exact alarm for reminder ID: " + reminder.getId() + " at " + alarmTime);
-                } else {
-                    alarmManager.setAndAllowWhileIdle(
-                            AlarmManager.RTC_WAKEUP,
-                            alarmTime,
-                            pendingIntent
-                    );
-                    Log.d(TAG, "Scheduled inexact (setAndAllowWhileIdle) alarm for reminder ID: " + reminder.getId() + " at " + alarmTime);
-                }
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alarmManager.setExactAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP,
-                        alarmTime,
-                        pendingIntent
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Intent showIntent = new Intent(context, com.gg_tech_bharat.gremaider.MainActivity.class);
+                PendingIntent showPendingIntent = PendingIntent.getActivity(
+                        context, 
+                        reminder.getId() + 100000, 
+                        showIntent, 
+                        PendingIntent.FLAG_UPDATE_CURRENT | (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? PendingIntent.FLAG_IMMUTABLE : 0)
                 );
-                Log.d(TAG, "Scheduled exact alarm for reminder ID: " + reminder.getId() + " at " + alarmTime);
+                
+                AlarmManager.AlarmClockInfo alarmClockInfo = new AlarmManager.AlarmClockInfo(
+                        alarmTime,
+                        showPendingIntent
+                );
+                
+                alarmManager.setAlarmClock(alarmClockInfo, pendingIntent);
+                Log.d(TAG, "Scheduled reliable alarm clock info for reminder ID: " + reminder.getId() + " at " + alarmTime);
             } else {
                 alarmManager.setExact(
                         AlarmManager.RTC_WAKEUP,
                         alarmTime,
                         pendingIntent
                 );
-                Log.d(TAG, "Scheduled exact alarm (SDK < M) for reminder ID: " + reminder.getId() + " at " + alarmTime);
+                Log.d(TAG, "Scheduled exact alarm (SDK < LOLLIPOP) for reminder ID: " + reminder.getId() + " at " + alarmTime);
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to schedule alarm for reminder ID: " + reminder.getId(), e);

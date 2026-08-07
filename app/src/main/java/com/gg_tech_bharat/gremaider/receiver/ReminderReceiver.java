@@ -131,37 +131,34 @@ public class ReminderReceiver extends BroadcastReceiver {
         }
 
         // Create Channel for Android O+ with dynamic settings based on user preferences
+        String dynamicChannelId = CHANNEL_ID + "_" + soundUriStr.hashCode();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Use a unique channel ID if the user wants an alarm sound to ensure it's updated
-            String channelId = CHANNEL_ID;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel channel = new NotificationChannel(
-                        channelId,
-                        "Reminder Alerts",
-                        NotificationManager.IMPORTANCE_HIGH
-                );
-                channel.setDescription("Shows priority on-device AI reminders");
-                channel.enableLights(true);
-                channel.setLightColor(Color.BLUE);
-                
-                if (isVibrate) {
-                    channel.enableVibration(true);
-                    channel.setVibrationPattern(new long[]{0, 800, 800});
-                } else {
-                    channel.enableVibration(false);
-                    channel.setVibrationPattern(null);
-                }
-
-                if (soundUri != null) {
-                    android.media.AudioAttributes audioAttributes = new android.media.AudioAttributes.Builder()
-                            .setUsage(android.media.AudioAttributes.USAGE_ALARM)
-                            .setContentType(android.media.AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                            .build();
-                    channel.setSound(soundUri, audioAttributes);
-                }
-
-                notificationManager.createNotificationChannel(channel);
+            NotificationChannel channel = new NotificationChannel(
+                    dynamicChannelId,
+                    "Reminder Alerts",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel.setDescription("Shows priority on-device AI reminders");
+            channel.enableLights(true);
+            channel.setLightColor(Color.BLUE);
+            
+            if (isVibrate) {
+                channel.enableVibration(true);
+                channel.setVibrationPattern(new long[]{0, 800, 800});
+            } else {
+                channel.enableVibration(false);
+                channel.setVibrationPattern(null);
             }
+
+            if (soundUri != null) {
+                android.media.AudioAttributes audioAttributes = new android.media.AudioAttributes.Builder()
+                        .setUsage(android.media.AudioAttributes.USAGE_ALARM)
+                        .setContentType(android.media.AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                        .build();
+                channel.setSound(soundUri, audioAttributes);
+            }
+
+            notificationManager.createNotificationChannel(channel);
         }
 
         // Tap Action (Open Main Screen)
@@ -209,8 +206,9 @@ public class ReminderReceiver extends BroadcastReceiver {
             priorityText = "[🟡 Medium] ";
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, dynamicChannelId)
                 .setSmallIcon(R.drawable.ic_notification) 
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentTitle(priorityText + reminder.getTitle())
                 .setContentText(reminder.getDescription() != null && !reminder.getDescription().isEmpty() 
                         ? reminder.getDescription() : "AI scheduled reminder alarm")
