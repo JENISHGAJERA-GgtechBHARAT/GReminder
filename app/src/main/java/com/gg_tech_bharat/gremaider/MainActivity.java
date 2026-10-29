@@ -134,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
     private void checkAndRequestPermissions() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             java.util.List<String> permissions = new java.util.ArrayList<>();
-            permissions.add(android.Manifest.permission.READ_CALENDAR);
-            permissions.add(android.Manifest.permission.WRITE_CALENDAR);
             permissions.add(android.Manifest.permission.RECORD_AUDIO);
             permissions.add(android.Manifest.permission.READ_PHONE_STATE);
             permissions.add(android.Manifest.permission.READ_CALL_LOG);

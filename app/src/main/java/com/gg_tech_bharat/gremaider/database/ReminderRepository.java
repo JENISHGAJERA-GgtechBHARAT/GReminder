@@ -75,11 +75,6 @@ public class ReminderRepository {
 
     public void insert(Reminder reminder, OnCompleteListener<Long> listener) {
         executorService.execute(() -> {
-            // Sync with system calendar
-            long eventId = CalendarSyncManager.syncReminderToCalendar(context, reminder);
-            if (eventId > 0) {
-                reminder.setCalendarEventId(eventId);
-            }
             long id = reminderDao.insert(reminder);
             if (listener != null) {
                 mainThreadHandler.post(() -> listener.onComplete(id));
@@ -89,19 +84,12 @@ public class ReminderRepository {
 
     public void update(Reminder reminder) {
         executorService.execute(() -> {
-            // Update linked calendar event
-            long eventId = CalendarSyncManager.syncReminderToCalendar(context, reminder);
-            if (eventId > 0) {
-                reminder.setCalendarEventId(eventId);
-            }
             reminderDao.update(reminder);
         });
     }
 
     public void delete(Reminder reminder) {
         executorService.execute(() -> {
-            // Delete linked calendar event
-            CalendarSyncManager.deleteCalendarEvent(context, reminder);
             reminderDao.delete(reminder);
         });
     }
