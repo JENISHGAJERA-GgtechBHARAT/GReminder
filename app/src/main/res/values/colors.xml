@@ -29,7 +29,7 @@
     <color name="grey_dark">#707070</color>
     <color name="divider">#1A000000</color>
     <color name="transparent">#00000000</color>
-    <color name="ic_launcher_background">#12131A</color>
+    <color name="ic_launcher_background">#050101</color>
 
     <!-- Category Card Backgrounds (Light mode pastel shades) -->
     <color name="bg_cat_work">#E3F2FD</color>
